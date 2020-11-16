@@ -4,11 +4,15 @@
   "version": "0.1.0",
   "description": "Manage all your Git repositories, organisations, providers from one place",
   "scripts": {
+    "postinstall": "lerna bootstrap",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "workspaces": {
     "packages": [
       "packages/*"
     ]
+  },
+  "devDependencies": {
+    "lerna": "^3.22.1"
   }
 }
