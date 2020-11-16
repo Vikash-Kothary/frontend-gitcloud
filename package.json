@@ -6,6 +6,7 @@
   "scripts": {
     "postinstall": "run-s -l postinstall:*",
     "postinstall:deduplicate": "yarn-deduplicate",
+    "postinstall:clean" : "yarn autoclean --force",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "workspaces": {
