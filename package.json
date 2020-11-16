@@ -6,11 +6,12 @@
   "scripts": {
     "postinstall": "run-s -l postinstall:*",
     "postinstall:deduplicate": "yarn-deduplicate",
-    "postinstall:clean" : "yarn autoclean --force",
-    "docs": "echo \"Error: no docs specified\" && exit 1",
-    "lint": "echo \"Error: no lint specified\" && exit 1",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "echo \"Error: no start specified\" && exit 1"
+    "postinstall:clean": "yarn autoclean --force",
+    "docs": "gulp docs",
+    "lint": "gulp lint",
+    "test": "gulp test",
+    "build": "gulp build",
+    "start": "gulp start"
   },
   "workspaces": {
     "packages": [
@@ -18,8 +19,13 @@
     ]
   },
   "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-debug": "^4.0.0",
+    "gulp-exec": "^5.0.0",
     "lerna": "^3.22.1",
     "npm-run-all": "^4.1.5",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.5",
     "yarn-deduplicate": "^3.1.0"
   }
 }
