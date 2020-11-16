@@ -4,7 +4,8 @@
   "version": "0.1.0",
   "description": "Manage all your Git repositories, organisations, providers from one place",
   "scripts": {
-    "postinstall": "lerna bootstrap",
+    "postinstall": "run-s -l postinstall:*",
+    "postinstall:deduplicate": "yarn-deduplicate",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "workspaces": {
@@ -13,6 +14,8 @@
     ]
   },
   "devDependencies": {
-    "lerna": "^3.22.1"
+    "lerna": "^3.22.1",
+    "npm-run-all": "^4.1.5",
+    "yarn-deduplicate": "^3.1.0"
   }
 }
