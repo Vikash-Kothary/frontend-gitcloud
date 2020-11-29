@@ -16,8 +16,8 @@ const config = {
 		markdown: ['docs/**/*.md']
 	},
 	typescript: {
-		configPath: 'packages/internals/src/lint/.eslintrc',
-		ignorePath: 'packages/internals/src/lint/.eslintignore'
+		configPath: 'packages/internals/src/eslint/.eslintrc.json',
+		ignorePath: 'packages/internals/src/eslint/.eslintignore'
 	},
 	storybook: {
 		port: 31000,
