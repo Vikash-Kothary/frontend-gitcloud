@@ -4,6 +4,7 @@ image: node:latest
 variables:
   ENV: ci
   CI: "true"
+  YARN: yarn
 
 cache:
   key: ${CI_COMMIT_REF_SLUG}
