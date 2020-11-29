@@ -24,10 +24,10 @@ before_script:
   - echo
   - make init-frontend
 
-lint:
-  stage: lint
-  script:
-    - make lint-frontend
+# lint:
+#   stage: lint
+#   script:
+#     - make lint-frontend
 
 tests:
   stage: tests
