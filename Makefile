@@ -1,5 +1,6 @@
 #!/bin/make
 
+SHELL := /bin/bash
 GITCLOUD_FRONTEND_PATH := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 GITCLOUD_FRONTEND_NAME ?= "GitCloud"
 GITCLOUD_FRONTEND_VERSION ?= "0.1.0"
