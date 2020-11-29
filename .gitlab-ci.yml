@@ -1,0 +1,52 @@
+---
+image: node:latest
+
+variables:
+  ENV: ci
+  CI: true
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules
+
+stages:
+  - clean
+  - lint
+  - tests
+  - build
+  - release
+  - package
+  - deploy
+
+before_script:
+  - make help-frontend
+  - echo
+  - make init-frontend
+
+lint:
+  stage: lint
+  script:
+    - make lint-frontend
+
+tests:
+  stage: tests
+  script:
+    - make tests-frontend
+
+build:
+  stage: build
+  script:
+    - make build-frontend
+  only:
+    - develop
+
+deploy:
+  stage: deploy
+  script:
+    - make deploy-frontend
+  artifacts:
+    paths:
+      - build/docs
+  only:
+    - develop
