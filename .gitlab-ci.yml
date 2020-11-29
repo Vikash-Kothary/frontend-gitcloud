@@ -3,7 +3,7 @@ image: node:latest
 
 variables:
   ENV: ci
-  CI: true
+  CI: "true"
 
 cache:
   key: ${CI_COMMIT_REF_SLUG}
