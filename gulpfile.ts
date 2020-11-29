@@ -10,7 +10,10 @@ import * as eslint from 'gulp-eslint';
 
 // Config
 const config = {
-	src: ['packages/**/*.ts', '!**/node_modules/**', 'docs/**/*.md'],
+	src: {
+		typescript: ['packages/**/*.ts', '!**/node_modules/**', ],
+		markdown: ['docs/**/*.md']
+	},
 	typescript: {
 		configPath: 'packages/internals/src/lint/.eslintrc',
 		ignorePath: 'packages/internals/src/lint/.eslintignore'
@@ -20,7 +23,7 @@ const config = {
 
 // Internals
 const placeholder = () => {
-	return gulp.src(config.src)
+	return gulp.src(config.src.typescript)
 		.pipe(debug())
 }
 
@@ -39,7 +42,7 @@ const autoclean = () => {
 }
 
 const lintTS = () => {
-	return gulp.src(config.src)
+	return gulp.src(config.src.typescript)
 		.pipe(debug())
 		.pipe(eslint({ configFile: config.typescript.configPath }))
 		.pipe(eslint.format())
