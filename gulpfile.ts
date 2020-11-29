@@ -1,3 +1,4 @@
+// @ts-nocheck
 // file: gulpfile.ts
 
 // Imports
