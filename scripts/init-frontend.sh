@@ -10,7 +10,7 @@ init_default() {
 	echo "[NPM] : $(npm -v)"
 	echo "[Yarn]: $(yarn -v)"
 	echo
-	${YARN} install
+	yarn install
 }
 
 case "${ENV}" in
