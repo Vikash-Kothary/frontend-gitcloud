@@ -69,16 +69,18 @@ const autoclean = (cb) => {
 	});
 }
 
+const deduplicate = (cb) => {
+	let cmd = `yarn yarn-deduplicate`;
+	sh(cmd, (err, stdout, stderr) => {
+		console.log(stdout);
+		console.log(stderr);
+		cb(err);
+	});
+}
+
 const placeholder = () => {
 	return gulp.src(config.src.typescript)
 		.pipe(debug())
-}
-
-const deduplicate = () => {
-	return gulp.src('yarn.lock')
-		.pipe(debug())
-		.pipe(exec('yarn yarn-deduplicate'))
-		.pipe(gulp.dest('./'))
 }
 
 const lintTS = () => {
