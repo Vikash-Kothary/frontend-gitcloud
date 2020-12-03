@@ -5,6 +5,7 @@ variables:
   ENV: ci
   CI: "true"
   YARN: yarn
+  NODE_ENV: ci
 
 cache:
   key: ${CI_COMMIT_REF_SLUG}
