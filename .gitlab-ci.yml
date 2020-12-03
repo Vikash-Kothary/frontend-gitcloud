@@ -41,8 +41,6 @@ build:
   stage: build
   script:
     - make build-frontend
-  only:
-    - develop
 
 # GitLab Pages requires the job name to be pages.
 pages:
