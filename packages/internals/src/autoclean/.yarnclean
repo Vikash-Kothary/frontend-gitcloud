@@ -43,3 +43,6 @@ wercker.yml
 
 # misc
 *.md
+
+.github
+PULL_REQUEST_TEMPLATE
