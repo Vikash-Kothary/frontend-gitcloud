@@ -1,5 +1,8 @@
 # .gitignore
 
+config/
+!config/.env.example
+
 /.pnp
 .pnp.js
 
