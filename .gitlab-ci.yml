@@ -44,7 +44,8 @@ build:
   only:
     - develop
 
-deploy:
+# GitLab Pages requires the job name to be pages.
+pages:
   stage: deploy
   script:
       # GitLab pages requires the artifact to be called public.
