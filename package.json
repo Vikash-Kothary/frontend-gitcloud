@@ -4,9 +4,7 @@
   "version": "0.1.0",
   "description": "Manage all your Git repositories, organisations, providers from one place",
   "scripts": {
-    "postinstall": "run-s -l postinstall:*",
-    "postinstall:deduplicate": "yarn-deduplicate",
-    "postinstall:clean": "yarn autoclean --force",
+    "postinstall": "gulp postinstall",
     "docs": "gulp docs",
     "lint": "gulp lint",
     "test": "gulp test",

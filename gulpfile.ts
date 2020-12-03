@@ -23,6 +23,9 @@ const config = {
 		port: 31000,
 		configFolder: 'packages/internals/src/storybook',
 		buildFolder: 'build/docs'
+	},
+	autoclean: {
+		configFile: 'packages/internals/src/autoclean/.yarnclean'
 	}
 }
 
@@ -54,23 +57,30 @@ const runStorybook = (cb) => {
 	});
 }
 
+const autoclean = (cb) => {
+	let cmd = `rm_if_link(){ [ ! -L "$1" ] || rm "$1"; }`
+	cmd += ` && ln -s ${config.autoclean.configFile} .yarnclean`
+	cmd += ` && yarn autoclean --force`;
+	cmd += ` && rm_if_link .yarnclean`;
+	sh(cmd, (err, stdout, stderr) => {
+		console.log(stdout);
+		console.log(stderr);
+		cb(err);
+	});
+}
+
+const deduplicate = (cb) => {
+	let cmd = `yarn yarn-deduplicate`;
+	sh(cmd, (err, stdout, stderr) => {
+		console.log(stdout);
+		console.log(stderr);
+		cb(err);
+	});
+}
+
 const placeholder = () => {
 	return gulp.src(config.src.typescript)
 		.pipe(debug())
-}
-
-const deduplicate = () => {
-	return gulp.src('yarn.lock')
-		.pipe(debug())
-		.pipe(exec('yarn yarn-deduplicate'))
-		.pipe(gulp.dest('./'))
-}
-
-const autoclean = () => {
-	return gulp.src(['node_modules/**'])
-		.pipe(debug())
-		.pipe(exec('yarn autoclean --force'))
-		.pipe(gulp.dest('./node_modules'))
 }
 
 const lintTS = () => {
