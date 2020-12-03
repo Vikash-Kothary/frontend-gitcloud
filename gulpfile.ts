@@ -38,7 +38,7 @@ const buildStorybook = (cb) => {
 	sh(cmd, (err, stdout, stderr) => {
 		console.log(stdout);
 		console.log(stderr);
-		cb(error);
+		cb(err);
 	});
 }
 
@@ -50,7 +50,7 @@ const runStorybook = (cb) => {
 	sh(cmd, (err, stdout, stderr) => {
 		console.log(stdout);
 		console.log(stderr);
-		cb(error);
+		cb(err);
 	});
 }
 
