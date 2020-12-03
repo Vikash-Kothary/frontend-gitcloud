@@ -47,7 +47,10 @@ build:
 deploy:
   stage: deploy
   script:
-      - test -f build/docs/index.html
+      # GitLab pages requires the artifact to be called public.
+      - mv build/docs public
   artifacts:
     paths:
-      - build/docs
+      - public
+  only:
+    - develop
