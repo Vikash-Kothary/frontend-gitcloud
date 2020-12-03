@@ -6,11 +6,11 @@
 pushd "${GITCLOUD_FRONTEND_PATH}" 
 
 init_default() {
-	echo "[Node]: $(node -v)"
-	echo "[NPM] : $(npm -v)"
-	echo "[Yarn]: $(yarn -v)"
+	echo "[Node]: $(${NODE} -v)"
+	echo "[NPM] : $(${NPM} -v)"
+	echo "[Yarn]: $(${YARN} -v)"
 	echo
-	yarn install
+	${YARN=yarn} install
 }
 
 case "${ENV}" in
