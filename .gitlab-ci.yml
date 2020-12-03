@@ -10,6 +10,7 @@ cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
     - node_modules
+    - build
 
 stages:
   - clean
@@ -35,12 +36,17 @@ tests:
   script:
     - make tests-frontend
 
-pages:
+build:
   stage: build
   script:
     - make build-frontend
+  only:
+    - develop
+
+deploy:
+  stage: deploy
+  script:
+      - test -f build/docs/index.html
   artifacts:
     paths:
       - build/docs
-  only:
-    - develop
