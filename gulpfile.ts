@@ -27,7 +27,10 @@ const config = {
 	},
 	autoclean: {
 		configFile: 'packages/internals/src/autoclean/.yarnclean'
-	}
+	},
+	clean: {
+		typescript: ['packages/**/lib/**', '!**/node_modules/**']
+	},
 }
 
 
@@ -92,6 +95,11 @@ const lintTS = () => {
 		.pipe(eslint.failAfterError())
 }
 
+const cleanTypescript = () => {
+	return gulp.src(config.clean.typescript)
+		.pipe(debug());
+}
+
 
 // Private
 gulp.task('postinstall:deduplicate', deduplicate);
@@ -100,6 +108,7 @@ gulp.task('lint:typescript', lintTS);
 gulp.task('lint:typescript:fix', placeholder);
 gulp.task('build:storybook', buildStorybook);
 gulp.task('run:storybook', runStorybook);
+gulp.task('clean:typescript', cleanTypescript);
 
 // Public
 gulp.task('default', placeholder);
@@ -119,3 +128,4 @@ gulp.task('build', gulp.parallel(
 	'build:storybook'
 ));
 gulp.task('start', placeholder);
+gulp.task('clean', placeholder);
