@@ -15,7 +15,7 @@ const config = {
 		typescript: ['packages/**/*.ts', '!**/node_modules/**', ],
 		markdown: ['docs/**/*.md']
 	},
-	typescript: {
+	eslint: {
 		configPath: 'packages/internals/src/eslint/.eslintrc.json',
 		ignorePath: 'packages/internals/src/eslint/.eslintignore'
 	},
@@ -86,7 +86,7 @@ const placeholder = () => {
 const lintTS = () => {
 	return gulp.src(config.src.typescript)
 		.pipe(debug())
-		.pipe(eslint({ configFile: config.typescript.configPath }))
+		.pipe(eslint({ configFile: config.eslint.configPath }))
 		.pipe(eslint.format())
 		.pipe(eslint.failAfterError())
 }
