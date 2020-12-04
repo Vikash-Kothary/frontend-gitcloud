@@ -22833,6 +22833,13 @@ vinyl-fs@^3.0.0, vinyl-fs@^3.0.3:
     vinyl "^2.0.0"
     vinyl-sourcemap "^1.1.0"
 
+vinyl-paths@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/vinyl-paths/-/vinyl-paths-3.0.1.tgz#16b42404e21ebddfb75954863f553af3345d56b5"
+  integrity sha512-fpjimhur1emSbJSvy5dJjDklCFEh2LvQRSHPzMQlYFjPrdFMHAyzSe1fiLzykoqg9X2tqH8evhsOUDNT55a0sw==
+  dependencies:
+    through2 "^3.0.1"
+
 vinyl-sourcemap@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/vinyl-sourcemap/-/vinyl-sourcemap-1.1.0.tgz#92a800593a38703a8cdb11d8b300ad4be63b3e16"

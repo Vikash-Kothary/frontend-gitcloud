@@ -8,6 +8,8 @@ import * as exec from 'gulp-exec';
 import { exec as sh } from 'child_process';
 import * as eslint from 'gulp-eslint';
 import * as ts from 'gulp-typescript';
+import * as del from 'del';
+import * as vinylPaths from 'vinyl-paths';
 
 
 // Config
