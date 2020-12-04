@@ -98,8 +98,8 @@ gulp.task('postinstall:deduplicate', deduplicate);
 gulp.task('postinstall:autoclean', autoclean);
 gulp.task('lint:typescript', lintTS);
 gulp.task('lint:typescript:fix', placeholder);
-gulp.task('build:storybook', buildStorybook)
-gulp.task('run:storybook', runStorybook)
+gulp.task('build:storybook', buildStorybook);
+gulp.task('run:storybook', runStorybook);
 
 // Public
 gulp.task('default', placeholder);
