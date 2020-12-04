@@ -16,7 +16,8 @@ import * as ts from 'gulp-typescript';
 // Config
 const config = {
 	src: {
-		typescript: ['packages/**/*.ts', '!**/node_modules/**', ],
+		sourceOptions: { base: './' },
+		typescript: ['packages/**/*.ts', '!packages/**/*.d.ts', '!**/node_modules/**'],
 		markdown: ['docs/**/*.md']
 	},
 	eslint: {
@@ -98,6 +99,14 @@ const lintTS = () => {
 		.pipe(eslint.failAfterError())
 }
 
+const buildTypescript = () => {
+	return gulp.src(config.src.typescript, config.src.sourceOptions)
+		.pipe(debug())
+		.pipe(ts())
+		.pipe(debug())
+		.pipe(gulp.dest('.'));
+}
+
 const cleanTypescript = () => {
 	return gulp.src(config.clean.typescript)
 		.pipe(debug())
@@ -110,9 +119,11 @@ gulp.task('postinstall:deduplicate', deduplicate);
 gulp.task('postinstall:autoclean', autoclean);
 gulp.task('lint:typescript', lintTS);
 gulp.task('lint:typescript:fix', placeholder);
+gulp.task('build:typescript', buildTypescript);
 gulp.task('build:storybook', buildStorybook);
 gulp.task('run:storybook', runStorybook);
 gulp.task('clean:typescript', cleanTypescript);
+
 
 // Public
 gulp.task('default', placeholder);
@@ -129,6 +140,7 @@ gulp.task('lint', gulp.series(
 ));
 gulp.task('test', placeholder);
 gulp.task('build', gulp.parallel(
+	'build:typescript',
 	'build:storybook'
 ));
 gulp.task('start', placeholder);
