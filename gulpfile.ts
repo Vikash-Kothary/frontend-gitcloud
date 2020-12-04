@@ -31,7 +31,7 @@ const config = {
 		configFile: 'packages/internals/src/autoclean/.yarnclean'
 	},
 	clean: {
-		typescript: ['packages/**/lib/**', '!**/node_modules/**']
+		typescript: ['packages/**/lib', '!**/node_modules/**']
 	},
 }
 
@@ -99,7 +99,8 @@ const lintTS = () => {
 
 const cleanTypescript = () => {
 	return gulp.src(config.clean.typescript)
-		.pipe(debug());
+		.pipe(debug())
+		.pipe(vinylPaths(del));
 }
 
 
@@ -130,4 +131,6 @@ gulp.task('build', gulp.parallel(
 	'build:storybook'
 ));
 gulp.task('start', placeholder);
-gulp.task('clean', placeholder);
+gulp.task('clean', gulp.parallel(
+	'clean:typescript'
+));
