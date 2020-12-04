@@ -2,6 +2,7 @@
 
 config/
 !config/.env.example
+lib/
 
 /.pnp
 .pnp.js

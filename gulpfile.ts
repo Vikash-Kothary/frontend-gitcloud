@@ -11,6 +11,7 @@ import * as debug from 'gulp-debug';
 import * as exec from 'gulp-exec';
 import * as eslint from 'gulp-eslint';
 import * as ts from 'gulp-typescript';
+import * as rename from 'gulp-rename';
 
 
 // Config
@@ -103,6 +104,9 @@ const buildTypescript = () => {
 	return gulp.src(config.src.typescript, config.src.sourceOptions)
 		.pipe(debug())
 		.pipe(ts())
+		.pipe(rename((path) => {
+			path.dirname = path.dirname.replace('src', 'lib')
+		}))
 		.pipe(debug())
 		.pipe(gulp.dest('.'));
 }
