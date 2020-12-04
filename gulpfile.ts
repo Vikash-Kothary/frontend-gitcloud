@@ -2,14 +2,15 @@
 // file: gulpfile.ts
 
 // Imports
+import * as path from 'path';
+import * as del from 'del';
+import { exec as sh } from 'child_process';
+import * as vinylPaths from 'vinyl-paths';
 import * as gulp from 'gulp';
 import * as debug from 'gulp-debug';
 import * as exec from 'gulp-exec';
-import { exec as sh } from 'child_process';
 import * as eslint from 'gulp-eslint';
 import * as ts from 'gulp-typescript';
-import * as del from 'del';
-import * as vinylPaths from 'vinyl-paths';
 
 
 // Config
