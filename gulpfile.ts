@@ -7,6 +7,7 @@ import * as debug from 'gulp-debug';
 import * as exec from 'gulp-exec';
 import { exec as sh } from 'child_process';
 import * as eslint from 'gulp-eslint';
+import * as ts from 'gulp-typescript';
 
 
 // Config
