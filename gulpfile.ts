@@ -122,6 +122,13 @@ const cleanTypescript = () => {
 		.pipe(vinylPaths(del));
 }
 
+const watchTypescript = () => {
+	gulp.watch(config.src.typescript, gulp.series(
+		'clean:typescript',
+		'build:typescript'
+	));
+}
+
 
 // Private
 gulp.task('postinstall:deduplicate', deduplicate);
@@ -132,6 +139,7 @@ gulp.task('build:typescript', buildTypescript);
 gulp.task('build:storybook', buildStorybook);
 gulp.task('run:storybook', runStorybook);
 gulp.task('clean:typescript', cleanTypescript);
+gulp.task('watch:typescript', watchTypescript);
 
 
 // Public
@@ -155,4 +163,7 @@ gulp.task('build', gulp.parallel(
 gulp.task('start', placeholder);
 gulp.task('clean', gulp.parallel(
 	'clean:typescript'
+));
+gulp.task('watch', gulp.parallel(
+	'watch:typescript'
 ));
