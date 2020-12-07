@@ -6,10 +6,9 @@
 pushd "${GITCLOUD_FRONTEND_PATH}" 
 
 clean_default() {
+	gulp clean
 	rm -rv node_modules
 	rm -rv packages/**/node_modules
-	rm -rv packages/**/lib
-	rm -rv build
 }
 
 case "${ENV}" in

@@ -2,20 +2,26 @@
 // file: gulpfile.ts
 
 // Imports
+import * as path from 'path';
+import * as del from 'del';
+import { exec as sh } from 'child_process';
+import * as vinylPaths from 'vinyl-paths';
 import * as gulp from 'gulp';
 import * as debug from 'gulp-debug';
 import * as exec from 'gulp-exec';
-import { exec as sh } from 'child_process';
 import * as eslint from 'gulp-eslint';
+import * as ts from 'gulp-typescript';
+import * as rename from 'gulp-rename';
 
 
 // Config
 const config = {
 	src: {
-		typescript: ['packages/**/*.ts', '!**/node_modules/**', ],
+		sourceOptions: { base: './' },
+		typescript: ['packages/**/*.ts', '!packages/**/*.d.ts', '!**/node_modules/**'],
 		markdown: ['docs/**/*.md']
 	},
-	typescript: {
+	eslint: {
 		configPath: 'packages/internals/src/eslint/.eslintrc.json',
 		ignorePath: 'packages/internals/src/eslint/.eslintignore'
 	},
@@ -26,7 +32,13 @@ const config = {
 	},
 	autoclean: {
 		configFile: 'packages/internals/src/autoclean/.yarnclean'
-	}
+	},
+	clean: {
+		typescript: ['packages/**/lib', '!**/node_modules/**']
+	},
+	typescript: {
+		configFile: 'packages/internals/src/typescript/tsconfig.json'
+	},
 }
 
 
@@ -86,9 +98,35 @@ const placeholder = () => {
 const lintTS = () => {
 	return gulp.src(config.src.typescript)
 		.pipe(debug())
-		.pipe(eslint({ configFile: config.typescript.configPath }))
+		.pipe(eslint({ configFile: config.eslint.configPath }))
 		.pipe(eslint.format())
 		.pipe(eslint.failAfterError())
+}
+
+const buildTypescript = () => {
+	const tsc = ts.createProject(config.typescript.configFile);
+
+	return gulp.src(config.src.typescript, config.src.sourceOptions)
+		.pipe(debug())
+		.pipe(tsc())
+		.pipe(rename((path) => {
+			path.dirname = path.dirname.replace('src', 'lib')
+		}))
+		.pipe(debug())
+		.pipe(gulp.dest('.'));
+}
+
+const cleanTypescript = () => {
+	return gulp.src(config.clean.typescript)
+		.pipe(debug())
+		.pipe(vinylPaths(del));
+}
+
+const watchTypescript = () => {
+	gulp.watch(config.src.typescript, gulp.series(
+		'clean:typescript',
+		'build:typescript'
+	));
 }
 
 
@@ -97,8 +135,12 @@ gulp.task('postinstall:deduplicate', deduplicate);
 gulp.task('postinstall:autoclean', autoclean);
 gulp.task('lint:typescript', lintTS);
 gulp.task('lint:typescript:fix', placeholder);
-gulp.task('build:storybook', buildStorybook)
-gulp.task('run:storybook', runStorybook)
+gulp.task('build:typescript', buildTypescript);
+gulp.task('build:storybook', buildStorybook);
+gulp.task('run:storybook', runStorybook);
+gulp.task('clean:typescript', cleanTypescript);
+gulp.task('watch:typescript', watchTypescript);
+
 
 // Public
 gulp.task('default', placeholder);
@@ -115,6 +157,13 @@ gulp.task('lint', gulp.series(
 ));
 gulp.task('test', placeholder);
 gulp.task('build', gulp.parallel(
+	'build:typescript',
 	'build:storybook'
 ));
 gulp.task('start', placeholder);
+gulp.task('clean', gulp.parallel(
+	'clean:typescript'
+));
+gulp.task('watch', gulp.parallel(
+	'watch:typescript'
+));
