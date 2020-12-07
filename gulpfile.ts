@@ -36,6 +36,9 @@ const config = {
 	clean: {
 		typescript: ['packages/**/lib', '!**/node_modules/**']
 	},
+	typescript: {
+		configFile: 'packages/internals/src/typescript/tsconfig.json'
+	},
 }
 
 
@@ -101,9 +104,11 @@ const lintTS = () => {
 }
 
 const buildTypescript = () => {
+	const tsc = ts.createProject(config.typescript.configFile);
+
 	return gulp.src(config.src.typescript, config.src.sourceOptions)
 		.pipe(debug())
-		.pipe(ts())
+		.pipe(tsc())
 		.pipe(rename((path) => {
 			path.dirname = path.dirname.replace('src', 'lib')
 		}))
