@@ -42,6 +42,11 @@ build:
   script:
     - make build-frontend
 
+release:
+  stage: release
+  script:
+    - make release-frontend
+
 # GitLab Pages requires the job name to be pages.
 pages:
   stage: deploy

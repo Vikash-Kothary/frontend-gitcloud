@@ -51,3 +51,9 @@ build-frontend:
 	@cd ${GITCLOUD_FRONTEND_PATH} && \
 	test -f "scripts/${*}.sh" && \
 	${SHELL} "scripts/${*}.sh"
+
+.PHONY: release-frontend
+release: release-frontend
+release-frontend:
+	@cd ${GITCLOUD_FRONTEND_PATH} && \
+	${YARN} release
