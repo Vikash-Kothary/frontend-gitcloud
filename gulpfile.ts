@@ -12,6 +12,7 @@ import * as exec from 'gulp-exec';
 import * as eslint from 'gulp-eslint';
 import * as ts from 'gulp-typescript';
 import * as rename from 'gulp-rename';
+import * as template from 'gulp-template';
 
 
 // Config
@@ -39,6 +40,12 @@ const config = {
 	typescript: {
 		configFile: 'packages/internals/src/typescript/tsconfig.json'
 	},
+	release: {
+		npmConfig: 'packages/internals/src/release/.npmrc',
+		npmRegistry: process.env.NPM_REGISTRY,
+		npmScope: process.env.NPM_SCOPE,
+		npmToken: process.env.NPM_TOKEN
+	}
 }
 
 
@@ -90,6 +97,29 @@ const deduplicate = (cb) => {
 	});
 }
 
+const prereleaseNPM = () => {
+	return gulp.src(config.release.npmConfig)
+		.pipe(template(process.env))
+		.pipe(gulp.dest('.'))
+}
+
+const releaseNPM = (cb) => {
+	let cmd = `yarn lerna publish`;
+	cmd += ` from-package`;
+	cmd += ` --registry ${config.release.configFile}`;
+	cmd += ` --yes`;
+	sh(cmd, (err, stdout, stderr) => {
+		console.log(stdout);
+		console.log(stderr);
+		cb(err);
+	});
+	
+}
+
+const postreleaseNPM = () => {
+	return del(['.npmrc']);
+}
+
 const placeholder = () => {
 	return gulp.src(config.src.typescript)
 		.pipe(debug())
@@ -138,6 +168,9 @@ gulp.task('lint:typescript:fix', placeholder);
 gulp.task('build:typescript', buildTypescript);
 gulp.task('build:storybook', buildStorybook);
 gulp.task('run:storybook', runStorybook);
+gulp.task('release:npm', releaseNPM);
+gulp.task('release:npm:pre', prereleaseNPM);
+gulp.task('release:npm:post', postreleaseNPM);
 gulp.task('clean:typescript', cleanTypescript);
 gulp.task('watch:typescript', watchTypescript);
 
@@ -161,6 +194,11 @@ gulp.task('build', gulp.parallel(
 	'build:storybook'
 ));
 gulp.task('start', placeholder);
+gulp.task('release', gulp.series(
+	'release:npm:pre',
+	'release:npm',
+	'release:npm:post',
+))
 gulp.task('clean', gulp.parallel(
 	'clean:typescript'
 ));
