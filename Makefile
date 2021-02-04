@@ -58,6 +58,12 @@ init-frontend:
 	@cd ${GITCLOUD_FRONTEND_PATH} && \
 	${YARN} install
 
+.PHONY: clean-frontend #: Download project dependencies.
+clean: clean-frontend # alias for quick access
+clean-frontend:
+	@cd ${GITCLOUD_FRONTEND_PATH} && \
+	${YARN} clean
+
 .PHONY: release-frontend
 release: release-frontend
 release-frontend:

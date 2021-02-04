@@ -10,7 +10,8 @@
     "test": "gulp test",
     "build": "gulp build",
     "release": "gulp release",
-    "start": "gulp start"
+    "start": "gulp start",
+    "clean": "gulp clean"
   },
   "workspaces": {
     "packages": [
