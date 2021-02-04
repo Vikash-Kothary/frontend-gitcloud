@@ -58,14 +58,21 @@ init-frontend:
 	@cd ${GITCLOUD_FRONTEND_PATH} && \
 	${YARN} install
 
+.PHONY: release-frontend #: Create new project release version.
+release: release-frontend # alias for quick access
+release-frontend:
+	@cd ${GITCLOUD_FRONTEND_PATH} && \
+	false
+
+.PHONY: publish-frontend #: Publish project to NPM registry.
+publish: publish-frontend # alias for quick access
+publish-frontend:
+	@cd ${GITCLOUD_FRONTEND_PATH} && \
+	${YARN} publish
+
 .PHONY: clean-frontend #: Download project dependencies.
 clean: clean-frontend # alias for quick access
 clean-frontend:
 	@cd ${GITCLOUD_FRONTEND_PATH} && \
 	${YARN} clean
 
-.PHONY: release-frontend
-release: release-frontend
-release-frontend:
-	@cd ${GITCLOUD_FRONTEND_PATH} && \
-	${YARN} release

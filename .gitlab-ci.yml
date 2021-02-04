@@ -13,6 +13,7 @@ stages:
   - tests
   - build
   - release
+  - publish
   - package
   - deploy
   - clean
@@ -40,10 +41,10 @@ build:
   script:
     - make build-frontend
 
-release:
-  stage: release
+publish:
+  stage: publish
   script:
-    - make release-frontend
+    - make publish-frontend
 
 # GitLab Pages requires the job name to be pages.
 pages:
