@@ -1,12 +1,6 @@
 ---
 image: node:14.15.4
 
-variables:
-  ENV: ci
-  CI: "true"
-  YARN: yarn
-  NODE_ENV: ci
-
 cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
