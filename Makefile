@@ -50,7 +50,7 @@ build-frontend:
 %:
 	@cd ${GITCLOUD_FRONTEND_PATH} && \
 	test -f "scripts/${*}.sh" && \
-	${SHELL} "scripts/${*}.sh"
+	${BASH} "scripts/${*}.sh"
 
 .PHONY: init-frontend #: Download project dependencies.
 init: init-frontend # alias for quick access
