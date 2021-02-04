@@ -57,3 +57,9 @@ pages:
       - public
   only:
     - develop
+
+clean:
+  stage: clean
+  script:
+    - make clean-frontend
+  when: always
