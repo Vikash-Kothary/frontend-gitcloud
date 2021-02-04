@@ -9,6 +9,7 @@ cache:
 
 stages:
   - clean
+  - init
   - lint
   - tests
   - build
@@ -18,8 +19,11 @@ stages:
 
 before_script:
   - make help-frontend
-  - echo
-  - make init-frontend
+
+init:
+  stage: init
+  script:
+    - make init-frontend
 
 # lint:
 #   stage: lint

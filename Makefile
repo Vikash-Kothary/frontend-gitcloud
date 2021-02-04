@@ -52,6 +52,12 @@ build-frontend:
 	test -f "scripts/${*}.sh" && \
 	${SHELL} "scripts/${*}.sh"
 
+.PHONY: init-frontend #: Download project dependencies.
+init: init-frontend # alias for quick access
+init-frontend:
+	@cd ${GITCLOUD_FRONTEND_PATH} && \
+	${YARN} install
+
 .PHONY: release-frontend
 release: release-frontend
 release-frontend:
