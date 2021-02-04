@@ -9,8 +9,8 @@
     "lint": "gulp lint",
     "test": "gulp test",
     "build": "gulp build",
-    "release": "gulp release",
     "start": "gulp start",
+    "publish-all": "gulp publish",
     "clean": "gulp clean"
   },
   "workspaces": {

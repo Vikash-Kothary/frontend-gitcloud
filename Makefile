@@ -68,7 +68,7 @@ release-frontend:
 publish: publish-frontend # alias for quick access
 publish-frontend:
 	@cd ${GITCLOUD_FRONTEND_PATH} && \
-	${YARN} publish
+	${YARN} publish-all
 
 .PHONY: clean-frontend #: Download project dependencies.
 clean: clean-frontend # alias for quick access
