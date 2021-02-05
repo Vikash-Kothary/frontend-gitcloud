@@ -35,16 +35,28 @@ tests:
   stage: tests
   script:
     - make tests-frontend
+  only:
+    - develop
 
 build:
   stage: build
   script:
     - make build-frontend
+  only:
+    - develop
+
+release:
+  stage: release
+  script:
+    - make gitlab-ci-workaround
+    - make release-frontend
 
 publish:
   stage: publish
   script:
     - make publish-frontend
+  only:
+    - develop
 
 # GitLab Pages requires the job name to be pages.
 pages:
