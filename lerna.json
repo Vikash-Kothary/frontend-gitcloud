@@ -1,9 +1,14 @@
 {
   "lerna": "3.13.0",
+  "npmClient": "yarn",
+  "useWorkspaces": true,
+  "version": "0.1.0",
   "packages": [
     "packages/*"
   ],
-  "npmClient": "yarn",
-  "useWorkspaces": true,
-  "version": "0.1.0"
+  "command": {
+  	"version": {
+  		"message": "[skip ci] Release %s"
+  	}
+  }
 }

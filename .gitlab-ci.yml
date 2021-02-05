@@ -41,10 +41,20 @@ build:
   script:
     - make build-frontend
 
+release:
+  stage: release
+  script:
+    - make gitlab-ci-workaround
+    - make release-frontend
+  only:
+    - develop
+
 publish:
   stage: publish
   script:
     - make publish-frontend
+  only:
+    - develop
 
 # GitLab Pages requires the job name to be pages.
 pages:
@@ -62,4 +72,3 @@ clean:
   stage: clean
   script:
     - make clean-frontend
-  when: always

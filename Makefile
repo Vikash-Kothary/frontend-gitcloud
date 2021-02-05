@@ -3,7 +3,7 @@
 SHELL := /bin/bash
 GITCLOUD_FRONTEND_PATH := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 GITCLOUD_FRONTEND_NAME ?= "GitCloud"
-GITCLOUD_FRONTEND_VERSION ?= "0.1.0"
+GITCLOUD_FRONTEND_VERSION ?= "v0.1.0"
 GITCLOUD_FRONTEND_DESCRIPTION ?= "Manage all your Git repositories, organisations, providers from one place."
 
 ENV ?= local
@@ -58,11 +58,11 @@ init-frontend:
 	@cd ${GITCLOUD_FRONTEND_PATH} && \
 	${YARN} install
 
-.PHONY: release-frontend #: Create new project release version.
+.PHONY: release-frontend #: Create new project version release.
 release: release-frontend # alias for quick access
 release-frontend:
 	@cd ${GITCLOUD_FRONTEND_PATH} && \
-	false
+	${BASH} scripts/release-frontend.sh
 
 .PHONY: publish-frontend #: Publish project to NPM registry.
 publish: publish-frontend # alias for quick access
