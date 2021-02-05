@@ -1,5 +1,9 @@
 {
   "name": "@vikash-kothary/gitcloud-internals",
   "version": "0.1.0",
-  "description": "Reuseable Internal Build Scripts for Git Cloud."
+  "description": "Reuseable Internal Build Scripts for Git Cloud.",
+  "bin": {
+  	"@vikash-kothary/gitcloud-internals": "bin/cli.js",
+  	"gitcloud-internals": "bin/cli.js"
+  }
 }

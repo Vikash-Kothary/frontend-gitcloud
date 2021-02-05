@@ -4,14 +4,14 @@
   "version": "0.1.0",
   "description": "Manage all your Git repositories, organisations, providers from one place",
   "scripts": {
-    "postinstall": "gulp postinstall",
-    "docs": "gulp docs",
-    "lint": "gulp lint",
-    "test": "gulp test",
-    "build": "gulp build",
-    "start": "gulp start",
-    "publish-all": "gulp publish",
-    "clean": "gulp clean"
+    "postinstall": "gitcloud-internals postinstall",
+    "docs": "gitcloud-internals docs",
+    "lint": "gitcloud-internals lint",
+    "test": "gitcloud-internals test",
+    "build": "gitcloud-internals build",
+    "start": "gitcloud-internals start",
+    "publish-all": "gitcloud-internals publish",
+    "clean": "gitcloud-internals clean"
   },
   "workspaces": {
     "packages": [
@@ -19,6 +19,7 @@
     ]
   },
   "devDependencies": {
+    "@vikash-kothary/gitcloud-internals": "0.1.0",
     "@storybook/addon-actions": "^6.1.9",
     "@storybook/addon-essentials": "^6.1.9",
     "@storybook/addon-links": "^6.1.9",
