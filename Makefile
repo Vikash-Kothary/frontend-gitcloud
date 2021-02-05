@@ -40,12 +40,6 @@ run-frontend:
 	@cd ${GITCLOUD_FRONTEND_PATH} && \
 	${YARN} start
 
-.PHONY: build-frontend #: Build frontend app.
-build: build-frontend # alias for quick access
-build-frontend: 
-	@cd ${GITCLOUD_FRONTEND_PATH} && \
-	${YARN} build
-	
 # Run scripts using make
 %:
 	@cd ${GITCLOUD_FRONTEND_PATH} && \
@@ -57,6 +51,12 @@ init: init-frontend # alias for quick access
 init-frontend:
 	@cd ${GITCLOUD_FRONTEND_PATH} && \
 	${YARN} install
+
+.PHONY: build-frontend #: Build frontend app.
+build: build-frontend # alias for quick access
+build-frontend: 
+	@cd ${GITCLOUD_FRONTEND_PATH} && \
+	${YARN} build
 
 .PHONY: release-frontend #: Create new project version release.
 release: release-frontend # alias for quick access
