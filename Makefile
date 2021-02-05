@@ -74,5 +74,5 @@ publish-frontend:
 clean: clean-frontend # alias for quick access
 clean-frontend:
 	@cd ${GITCLOUD_FRONTEND_PATH} && \
-	${YARN} clean
+	${BASH} scripts/clean-frontend.sh
 
