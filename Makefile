@@ -49,8 +49,8 @@ build-frontend:
 # Run scripts using make
 %:
 	@cd ${GITCLOUD_FRONTEND_PATH} && \
-	test -f "scripts/${*}.sh" && \
-	${BASH} "scripts/${*}.sh"
+	if [[ -f "scripts/${*}.sh" ]]; then \
+	${BASH} "scripts/${*}.sh"; fi
 
 .PHONY: init-frontend #: Download project dependencies.
 init: init-frontend # alias for quick access
