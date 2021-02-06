@@ -7,6 +7,9 @@ lib/
 /.pnp
 .pnp.js
 
+### NPM ###
+.npmrc
+
 ### Expo ###
 *.jks
 *.p8
