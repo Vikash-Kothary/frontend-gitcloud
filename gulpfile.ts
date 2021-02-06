@@ -31,8 +31,8 @@ const config = {
 		configFolder: 'packages/internals/src/storybook',
 		buildFolder: 'build/docs'
 	},
-	autoclean: {
-		configFile: 'packages/internals/src/autoclean/.yarnclean'
+	yarn: {
+		configFile: 'packages/internals/src/yarn/.yarnclean'
 	},
 	clean: {
 		typescript: ['packages/**/lib', '!**/node_modules/**']
@@ -40,8 +40,8 @@ const config = {
 	typescript: {
 		configFile: 'packages/internals/src/typescript/tsconfig.json'
 	},
-	publish: {
-		npmConfig: 'packages/internals/src/publish/.npmrc',
+	npm: {
+		npmConfig: 'packages/internals/src/npm/.npmrc',
 		npmRegistry: process.env.NPM_REGISTRY,
 		npmScope: process.env.NPM_SCOPE,
 		npmToken: process.env.NPM_TOKEN
@@ -78,7 +78,7 @@ const runStorybook = (cb) => {
 
 const autoclean = (cb) => {
 	let cmd = `rm_if_link(){ [ ! -L "$1" ] || rm "$1"; }`
-	cmd += ` && ln -s ${config.autoclean.configFile} .yarnclean`
+	cmd += ` && ln -s ${config.yarn.configFile} .yarnclean`
 	cmd += ` && yarn autoclean --force`;
 	cmd += ` && rm_if_link .yarnclean`;
 	sh(cmd, (err, stdout, stderr) => {
@@ -98,7 +98,7 @@ const deduplicate = (cb) => {
 }
 
 const prePublishNPM = () => {
-	return gulp.src(config.publish.npmConfig)
+	return gulp.src(config.npm.npmConfig)
 		.pipe(template(process.env))
 		.pipe(gulp.dest('.'))
 }
@@ -106,7 +106,7 @@ const prePublishNPM = () => {
 const publishNPM = (cb) => {
 	let cmd = `yarn lerna publish`;
 	cmd += ` from-package`;
-	cmd += ` --registry ${config.publish.configFile}`;
+	cmd += ` --registry ${config.npm.configFile}`;
 	cmd += ` --yes`;
 	sh(cmd, (err, stdout, stderr) => {
 		console.log(stdout);
