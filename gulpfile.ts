@@ -76,6 +76,16 @@ const runStorybook = (cb) => {
 	});
 }
 
+const startExpo = (cb) => {
+	let cmd = `yarn workspace @vikash-kothary/gitcloud-app`;
+	cmd += ` run start:web`;
+	sh(cmd, (err, stdout, stderr) => {
+		console.log(stdout);
+		console.log(stderr);
+		cb(err);
+	});
+}
+
 const autoclean = (cb) => {
 	let cmd = `rm_if_link(){ [ ! -L "$1" ] || rm "$1"; }`
 	cmd += ` && ln -s ${config.yarn.configFile} .yarnclean`
@@ -168,6 +178,7 @@ gulp.task('lint:typescript:fix', placeholder);
 gulp.task('build:typescript', buildTypescript);
 gulp.task('build:storybook', buildStorybook);
 gulp.task('run:storybook', runStorybook);
+gulp.task('start:expo', startExpo);
 gulp.task('publish:npm', publishNPM);
 gulp.task('publish:npm:pre', prePublishNPM);
 gulp.task('publish:npm:post', postPublishNPM);
@@ -193,7 +204,9 @@ gulp.task('build', gulp.parallel(
 	'build:typescript',
 	'build:storybook'
 ));
-gulp.task('start', placeholder);
+gulp.task('start', gulp.parallel(
+	'start:expo'
+));
 gulp.task('publish', gulp.series(
 	'publish:npm:pre',
 	'publish:npm',
