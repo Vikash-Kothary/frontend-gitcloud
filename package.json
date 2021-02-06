@@ -19,7 +19,7 @@
     ]
   },
   "devDependencies": {
-    "@vikash-kothary/gitcloud-internals": "0.1.0",
+    "@vikash-kothary/gitcloud-internals": "0.1.0-e5db420a",
     "@storybook/addon-actions": "^6.1.9",
     "@storybook/addon-essentials": "^6.1.9",
     "@storybook/addon-links": "^6.1.9",
