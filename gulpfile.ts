@@ -19,7 +19,7 @@ import * as template from 'gulp-template';
 const config = {
 	src: {
 		sourceOptions: { base: './' },
-		typescript: ['packages/**/*.ts', '!packages/**/*.d.ts', '!**/node_modules/**'],
+		typescript: ['packages/**/*.ts', 'packages/**/*.tsx', '!packages/**/*.d.ts', '!**/node_modules/**'],
 		markdown: ['docs/**/*.md']
 	},
 	eslint: {
